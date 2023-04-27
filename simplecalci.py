@@ -1,0 +1,12 @@
+num1 = int(input("Enter num 1 : "))
+num2 = int(input("Enter num 2 : "))
+a = num1 + num2
+b = num1 - num2
+c = num1 * num2
+d = num1 / num2
+e = num1 % num2
+print(f'{num1} + {num2} = {a}')
+print(f'{num1} - {num2} = {b}')
+print(f'{num1} * {num2} = {c}')
+print(f'{num1} / {num2} = {d}')
+print(f'{num1} % {num2} = {e}')
