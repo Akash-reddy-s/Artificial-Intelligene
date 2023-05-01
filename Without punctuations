@@ -1,0 +1,7 @@
+my_string = input("Enter a string: ")
+punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~''
+no_punctuations = ""
+for char in my_string:
+    if char not in punctuations:
+        no_punctuations += char
+print("String without punctuations:", no_punctuations
