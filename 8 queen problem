@@ -1,0 +1,49 @@
+BOARD_SIZE = 8
+
+def print_solution(board):
+    for i in range(BOARD_SIZE):
+        for j in range(BOARD_SIZE):
+            print(board[i][j], end=" ")
+        print()
+
+def is_safe(board, row, col):
+    # check row on left side
+    for i in range(col):
+        if board[row][i] == 1:
+            return False
+    
+    # check upper diagonal on left side
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+    
+    # check lower diagonal on left side
+    for i, j in zip(range(row, BOARD_SIZE, 1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+    
+    return True
+
+def solve_queens(board, col):
+    if col >= BOARD_SIZE:
+        return True
+    
+    for i in range(BOARD_SIZE):
+        if is_safe(board, i, col):
+            board[i][col] = 1
+            
+            if solve_queens(board, col+1):
+                return True
+            
+            board[i][col] = 0
+    
+    return False
+
+# initialize the board
+board = [[0 for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
+
+# solve the 8-Queens problem
+if solve_queens(board, 0):
+    print_solution(board)
+else:
+    print("No solution found")
