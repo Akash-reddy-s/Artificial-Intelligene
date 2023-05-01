@@ -1,0 +1,53 @@
+def water_jug(start=(0,0), goal=(2,0), limit=(4,3)):
+    visited = set()
+    
+    queue = [(start, [])]
+    
+    while queue:
+    
+        state, path = queue.pop(0)
+        
+     
+        if state == goal:
+            return path
+       
+        if state in visited:
+            continue
+        
+  
+        visited.add(state)
+       
+        for action, action_fn in ACTIONS.items():
+            next_state = action_fn(state, limit)
+            if next_state not in visited:
+                next_path = path + [action]
+                queue.append((next_state, next_path))
+   
+    return None
+ACTIONS = {
+    "fill_4": lambda state, limit: (limit[0], state[1]),
+    "fill_3": lambda state, limit: (state[0], limit[1]),
+    "empty_4": lambda state, limit: (0, state[1]),
+    "empty_3": lambda state, limit: (state[0], 0),
+    "pour_4_to_3": lambda state, limit: (
+        max(state[0]+state[1]-limit[1], 0),
+        min(state[0]+state[1], limit[1])
+    ),
+    "pour_3_to_4": lambda state, limit: (
+        min(state[0]+state[1], limit[0]),
+        max(state[0]+state[1]-limit[0], 0)
+    )
+}
+
+# Solve the Water Jug problem
+start = (0,0)
+goal = (2,0)
+limit = (4,3)
+path = water_jug(start, goal, limit)
+
+# Print the solution
+if path:
+    for action in path:
+        print(action)
+else:
+    print("No solution found")
